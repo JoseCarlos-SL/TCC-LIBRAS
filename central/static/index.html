@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LibrasLink — Central de atendimento com tradução de Libras para texto e voz em tempo real." />
+  <title>LibrasLink — Central de Atendimento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__brand">
+      <div class="brand-icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <path d="M8 24 C8 16, 16 8, 24 8" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M8 16 C8 12, 12 8, 16 8" stroke="url(#g2)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="24" cy="8" r="3" fill="url(#g1)"/>
+          <circle cx="8" cy="24" r="3" fill="url(#g2)"/>
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#7c3aed"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#06b6d4"/>
+              <stop offset="100%" stop-color="#7c3aed"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="brand-name">Libras<span class="brand-accent">Link</span></span>
+    </div>
+
+    <div class="header__status">
+      <div id="status-indicator" class="status-indicator status-indicator--disconnected" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="status-label" class="status-label">Conectando…</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- LETRA ATUAL (grande) -->
+    <section class="card card--letter" aria-label="Última letra reconhecida">
+      <p class="card__eyebrow">Última letra</p>
+      <div id="current-letter" class="letter-display" aria-live="polite" aria-atomic="true">—</div>
+      <div id="confidence-bar-wrap" class="confidence-wrap" aria-hidden="true">
+        <div id="confidence-bar" class="confidence-bar"></div>
+      </div>
+      <p id="confidence-value" class="confidence-value" aria-live="polite">—</p>
+    </section>
+
+    <!-- TEXTO FORMADO -->
+    <section class="card card--text" aria-label="Texto formado pelos sinais">
+      <p class="card__eyebrow">Texto formado</p>
+      <div id="current-text" class="text-display" role="region" aria-live="polite" aria-atomic="true">
+        <span class="text-placeholder">Aguardando sinais…</span>
+      </div>
+
+      <!-- AÇÕES -->
+      <div class="actions">
+        <button id="btn-speak" class="btn btn--primary" title="Ler o texto em voz alta (pt-BR)" disabled>
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          Falar
+        </button>
+
+        <button id="btn-clear" class="btn btn--danger" title="Apagar todo o histórico">
+          <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+            <path d="M10 11v6M14 11v6"/>
+          </svg>
+          Limpar
+        </button>
+      </div>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section class="card card--history" aria-label="Histórico de sinais recebidos">
+      <p class="card__eyebrow">Histórico de sinais</p>
+      <ul id="history-list" class="history-list" aria-live="polite">
+        <li class="history-empty">Nenhum sinal recebido ainda.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+opencv-python>=4.10
+mediapipe==0.10.14
+numpy<2
+scikit-learn
+joblib
+requests
+python-dotenv
